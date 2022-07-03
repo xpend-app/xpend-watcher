@@ -6,13 +6,13 @@ services:
       buildCommand: "pip install -r requirements.txt"
       startCommand: "celery --app tasks worker --loglevel info --concurrency 4"
       envVars:
-          - key: CELERY_BROKER_URL
+          - key: QUEUE_BROKER_URL
             fromService:
-                name: celery-redis
+                name: xpend-queue-broker
                 type: redis
                 property: connectionString
     - type: redis
-      name: xpend-watch-queue
+      name: xpend-queue-broker
       region: frankfurt
       maxmemoryPolicy: noeviction # recommended policy for queues
       ipAllowList: [] # only allow internal connections
