@@ -1,0 +1,9 @@
+{
+  "name": "xpend-watcher",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://github.com/xpend-app/xpend-watcher.git",
+  "author": "Filipe Medeiros <hello@filipesm.com>",
+  "license": "MIT",
+  "private": false
+}
