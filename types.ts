@@ -10,3 +10,8 @@ export interface JobData<DigitalCurrency extends SupportedDigitalCurrency> {
 export type JobProcessor<DigitalCurrency extends SupportedDigitalCurrency> = (
     data: JobData<DigitalCurrency>
 ) => Promise<void>;
+
+export interface WatchingAddress {
+    address: string;
+    amount?: string;
+}
