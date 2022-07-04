@@ -1,9 +1,9 @@
 services:
     - type: worker
-      name: queue
+      name: queue-processor
       region: frankfurt
       env: node
-      buildCommand: "pnpm build"
+      buildCommand: "yarn build"
       startCommand: "pnpm start"
       envVars:
           - key: QUEUE_BROKER_URL
