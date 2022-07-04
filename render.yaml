@@ -2,6 +2,7 @@ services:
     - type: worker
       name: queue-processor
       region: frankfurt
+      plan: free
       env: node
       buildCommand: "yarn && yarn build"
       startCommand: "yarn start"
@@ -14,5 +15,6 @@ services:
     - type: redis
       name: xpend-queue-broker
       region: frankfurt
+      plan: free
       maxmemoryPolicy: noeviction # recommended policy for queues
       ipAllowList: [] # only allow internal connections
