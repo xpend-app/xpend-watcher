@@ -1,4 +1,4 @@
-import { Worker, Processor, Queue } from "bullmq";
+import { Worker, Processor } from "bullmq";
 import Redis from "ioredis";
 import { nanoJobProcessor } from "./nano.js";
 
@@ -18,20 +18,6 @@ const processor: Processor<JobData<SupportedDigitalCurrency>> = async (job) => {
 const redisClient = new Redis(queueBrokerUrl, {
     maxRetriesPerRequest: null,
 });
-
-const queue = new Queue<JobData<SupportedDigitalCurrency>>("watch-queue", {
-    connection: redisClient,
-});
-
-await queue.add(
-    "nano_3o5dcp6kjish9xuu51akx1d8bp4pytk4diput3s8dkt7cktnmcg96aoi1cbw",
-    {
-        addressToWatch:
-            "nano_3o5dcp6kjish9xuu51akx1d8bp4pytk4diput3s8dkt7cktnmcg96aoi1cbw",
-        digitalCurrency: "XNO",
-        callbackUrl: "https://google.com",
-    }
-);
 
 new Worker("watch-queue", processor, {
     connection: redisClient,

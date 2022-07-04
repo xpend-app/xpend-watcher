@@ -30,8 +30,6 @@ export const nanoJobProcessor: JobProcessor<"XNO"> = async (data) => {
             });
         };
 
-        console.log(isNanoWebsocketConnected());
-
         watchNewAddress(
             {
                 address: data.addressToWatch,
@@ -112,6 +110,8 @@ const stopWatchingAddress = (
 
     nanoWebsocket.removeEventListener("message", messageHandler);
     nanoWatchingAddresses.filter((watching) => watching.address !== address);
+
+    console.log(`Stopped watching nano address ${address}`);
 };
 
 const sendMessage = (data: any) => nanoWebsocket.send(JSON.stringify(data));
