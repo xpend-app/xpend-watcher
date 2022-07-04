@@ -3,8 +3,8 @@ services:
       name: queue
       region: frankfurt
       env: node
-      buildCommand: "pip install -r requirements.txt"
-      startCommand: "celery --app tasks worker --loglevel info --concurrency 4"
+      buildCommand: "pnpm build"
+      startCommand: "pnpm start"
       envVars:
           - key: QUEUE_BROKER_URL
             fromService:

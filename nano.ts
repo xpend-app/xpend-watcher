@@ -30,6 +30,8 @@ export const nanoJobProcessor: JobProcessor<"XNO"> = async (data) => {
             });
         };
 
+        console.log(isNanoWebsocketConnected());
+
         watchNewAddress(
             {
                 address: data.addressToWatch,
@@ -39,7 +41,7 @@ export const nanoJobProcessor: JobProcessor<"XNO"> = async (data) => {
         );
     };
 
-    if (isNanoWebsocketConnected()) {
+    if (!isNanoWebsocketConnected()) {
         nanoWebsocket = new WebSocket("wss://nano.filipesm.com/ws");
         nanoWebsocket.onopen = () => process();
         nanoWebsocket.onclose = () =>
@@ -85,6 +87,8 @@ const watchNewAddress = (
 
     nanoWatchingAddresses.push(address);
     nanoWebsocket.addEventListener("message", messageHandler);
+
+    console.log(`Watching new nano address ${address.address}`);
 };
 
 const stopWatchingAddress = (
