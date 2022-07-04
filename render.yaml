@@ -2,7 +2,6 @@ services:
     - type: worker
       name: queue-processor
       region: frankfurt
-      plan: free
       env: node
       buildCommand: "yarn && yarn build"
       startCommand: "yarn start"
