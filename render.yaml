@@ -1,6 +1,6 @@
 services:
     - type: worker
-      name: queue-processor
+      name: xpend-watcher
       region: frankfurt
       env: node
       buildCommand: "yarn && yarn build"
@@ -8,11 +8,11 @@ services:
       envVars:
           - key: QUEUE_BROKER_URL
             fromService:
-                name: xpend-queue-broker
+                name: xpend-watcher-broker
                 type: redis
                 property: connectionString
     - type: redis
-      name: xpend-queue-broker
+      name: xpend-watcher-broker
       region: frankfurt
       plan: free
       maxmemoryPolicy: noeviction # recommended policy for queues
@@ -28,6 +28,6 @@ services:
       envVars:
           - key: QUEUE_BROKER_URL
             fromService:
-                name: xpend-queue-broker
+                name: xpend-watcher-broker
                 type: redis
                 property: connectionString
