@@ -6,7 +6,7 @@ services:
       buildCommand: "yarn && yarn build"
       startCommand: "yarn start"
       envVars:
-          - key: QUEUE_BROKER_URL
+          - key: WATCHER_BROKER_URL
             fromService:
                 name: xpend-watcher-broker
                 type: redis
@@ -26,7 +26,7 @@ services:
       buildCommand: yarn && yarn build
       startCommand: yarn start:prod
       envVars:
-          - key: QUEUE_BROKER_URL
+          - key: WATCHER_BROKER_URL
             fromService:
                 name: xpend-watcher-broker
                 type: redis
