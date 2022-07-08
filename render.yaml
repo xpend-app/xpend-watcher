@@ -17,3 +17,17 @@ services:
       plan: free
       maxmemoryPolicy: noeviction # recommended policy for queues
       ipAllowList: [] # only allow internal connections
+    - type: web
+      name: xpend
+      region: frankfurt
+      plan: free
+      repo: https://github.com/xpend-app/xpend.git
+      env: node
+      buildCommand: yarn && yarn build
+      startCommand: yarn start:prod
+      envVars:
+          - key: QUEUE_BROKER_URL
+            fromService:
+                name: xpend-queue-broker
+                type: redis
+                property: connectionString
